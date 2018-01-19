@@ -1,5 +1,7 @@
 # DUB-Up
 
+[![Build Status](https://travis-ci.org/rjframe/dub-up.svg?branch=master)](https://travis-ci.org/rjframe/dub-up)
+
 Automated dependency management for D, inspired by [pyup-bot](https://pyup.io/).
 
 DUB-Up will be two tools, a command-line and Github app, that will search for
