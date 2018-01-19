@@ -1,6 +1,6 @@
 module dub_up.github;
 
-enum githubApiUrl = "https://api.github.com";
+enum githubAPIURL = "https://api.github.com";
 
 class Github {
     import std.format : format;
@@ -12,10 +12,6 @@ class Github {
         _user = user;
         _repo = repo;
         _defaultBranch = defaultBranch;
-    }
-
-    @property string activeBranch() {
-        assert(0);
     }
 
     alias ResponseTuple = Tuple!(string, "response", string, "ETag");
@@ -53,7 +49,7 @@ class Github {
     */
     string getBranchSHA(string branchName) {
         auto res = sendGetRequest("{}/repos/{}/{}/branches/{}"
-                .format(githubApiUrl, _user, _repo));
+                .format(githubAPIURL, _user, _repo));
         auto data = res.response.parseJsonString();
         if (branchName !in data) {
             throw new Exception("The branch is not present in the repository.");
@@ -69,7 +65,7 @@ class Github {
 
         auto sha = getBranchSHA(branch);
         auto tree = sendGetRequest("{}/repos/{}/{}/git/trees/"
-                .format(githubApiUrl, _user, _repo));
+                .format(githubAPIURL, _user, _repo));
 
         auto data = parseJsonString(tree.response);
         foreach(item; data) {
@@ -97,7 +93,7 @@ class Github {
             throw new Exception("Invalid encoding.");
 
         auto data = assumeUTF(Base64.decode(fileData["content"].get!string));
-        if (data.isValidUtf) {
+        if (data.isValidUTF) {
             return cast(string)data;
         } else throw new Exception("Input is invalid Unicode string.");
     }
@@ -118,7 +114,7 @@ class Github {
 
 // Validate with a nicer interface. utf.validate throws if it's
 // invalid Unicode.
-bool isValidUtf(const char[] str) {
+bool isValidUTF(const char[] str) {
     import std.utf : validate;
     scope(failure) return false;
     validate(str);
