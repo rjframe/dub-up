@@ -1,0 +1,13 @@
+{
+	"name": "dub-up",
+	"authors": [
+		"Ryan Frame"
+	],
+	"dependencies": {
+		"vibe-d": "~>0.8.2",
+        "sdlang-d": "~>0.10.1"
+	},
+	"description": "Automatic dependency management for dub projects.",
+	"copyright": "Copyright © 2018 Ryan Frame",
+	"license": "MIT"
+}
